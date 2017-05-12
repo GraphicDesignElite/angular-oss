@@ -1,0 +1,4 @@
+#app-footer{ text-align: center; border-top:1px solid #efefef;}
+.app-footer-links>li{display:inline-block;}
+.app-footer-links>li>a{display:inline-block; padding:20px 10px; font-size:.8em; text-decoration: none; color:#777;}
+.app-footer-links>li>a:hover{color:#000;}

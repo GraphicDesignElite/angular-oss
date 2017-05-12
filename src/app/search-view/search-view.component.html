@@ -1,0 +1,78 @@
+<div id="search-page" [class.searching]="isSearching()">
+  <app-page-header></app-page-header>
+  <div id="content">
+    <!--start form -->
+    <div id="search-form-wrapper">
+      <img src="../../assets/img/ln_logo.svg" id="logo-large" />
+      <form id="search-form" name="search-form" (submit)="searchApi()">
+        <input id="search-query" name="search-query" placeholder="Search the .luxury Network" [(ngModel)]="searchQuery" #searchinput />
+        <input type="submit" id="search-button" (click)="searchApi()" value="Search"/>
+      </form>
+    </div>
+    <!--end form -->
+
+    
+    <!--start results -->
+    <div id="results" class="clearfix" *ngIf="results">
+      <p class="sr-result">{{numFound}} Results ( {{responseTime}} ms )</p>
+      <div id="results-wrapper">
+        <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
+          <div class="sr-card">
+            <h3>
+              <a href="{{document.fields['0'].values['0']}}">
+                <span [innerHTML]="document.snippets['0'].values['0'] | textHighlight: searchQuery"></span>
+              </a>
+            </h3>
+            <p class="sr-loc">
+              <span [innerHTML]="document.fields['0'].values['0'] | textHighlight: searchQuery"></span>
+            </p>
+            <p *ngIf="document.snippets[1].values[0]" class="sr-desc">
+              <span [innerHTML]="document.snippets[1].values[0] | textHighlight: searchQuery"></span>
+            </p>
+            <p *ngIf="!document.snippets[1].values[0]" class="sr-desc">No Description was found.</p>
+          </div>
+        </ng-container>
+        <div id="no-results" *ngIf="documents.length == 0">
+          <p>No Results Were Found for: <strong>{{searchQuery}}</strong></p>
+        </div>
+      </div>
+      <div id="sidebar">
+        
+      </div>
+    </div>
+  </div>
+    <!--
+    <div id="results" class="clearfix" *ngIf="results">
+      <p class="sr-result">{{numFound}} Results ( {{responseTime}} ms )</p>
+      <div id="results-wrapper">
+        <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
+          <div class="sr-card">
+            <h3>
+              <a href="{{document.Content_Location_s}}">
+                <span [innerHTML]="document.dc_title_s | textHighlight: searchQuery"></span>
+              </a>
+            </h3>
+            <p class="sr-loc">
+              <span [innerHTML]="document.Content_Location_s | textHighlight: searchQuery"></span>
+            </p>
+            <p *ngIf="document.description_s" class="sr-desc">
+              <span [innerHTML]="document.description_s | textHighlight: searchQuery"></span>
+            </p>
+            <p *ngIf="!document.description_s" class="sr-desc">No Description was found.</p>
+          </div>
+        </ng-container>
+        <div id="no-results" *ngIf="documents.length == 0">
+          <p>No Results Were Found for: <strong>{{searchQuery}}</strong></p>
+        </div>
+      </div>
+      <div id="sidebar">
+        
+      </div>
+    </div>
+  </div>
+  -->
+  <!--end content --> 
+</div>
+<div class="pagination-wrapper">
+    <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound"></pagination-buttons>
+</div>
