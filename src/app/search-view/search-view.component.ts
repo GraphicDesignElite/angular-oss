@@ -35,9 +35,6 @@ export class SearchViewComponent implements OnInit {
         });
   }
   ngOnInit() {
-    // produce result on page load
-
-  
     this._route.queryParams.subscribe(params => {
       if (params['q']) {
 
@@ -47,7 +44,7 @@ export class SearchViewComponent implements OnInit {
             this.offset = (this.page - 1) * this.rowsToDisplay -1; // Page 1 based
             if(this.offset!=0){this.offset++;}
           }
-          this.subscription = this._solrService.searchOSS(this.searchQuery, this.rowsToDisplay, this.offset).subscribe(results =>{
+          this.subscription = this._solrService.searchOSSTemplate(this.searchQuery, this.rowsToDisplay, this.offset).subscribe(results =>{
             
             this.results = results;
             this.numFound = this.results.numFound;
@@ -56,7 +53,7 @@ export class SearchViewComponent implements OnInit {
             this.documents = this.results.documents;
 
             //console.log(results);
-            //console.log(this.documents);
+            console.log(this.documents);
           });
 
       

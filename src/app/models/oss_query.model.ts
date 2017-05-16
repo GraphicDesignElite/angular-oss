@@ -1,3 +1,5 @@
+// Query Template Object Classes
+
 export class Collapsing{
     max:number;
     mode:string;
@@ -38,7 +40,7 @@ export class SearchField{
     }
 }
 
-
+// Query Template Submit Field Search
 export class OssQuery {
 
   query:string;
@@ -69,5 +71,20 @@ export class OssQuery {
             new SearchField('titleExact', 10),
             new SearchField('contentExact', 1),
         ]    
+    }
+}
+
+export class OssTemplateQuery {
+
+  query:string;
+  start:number;
+  rows:number;
+  lang: string;
+ 
+  constructor(query:string = '', start:number = 0, rows:number = 10) { 
+        this.query = query;
+        this.start = start;
+        this.rows = rows;
+        this.lang = 'ENGLISH';
     }
 }

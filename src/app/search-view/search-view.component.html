@@ -19,17 +19,17 @@
         <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
           <div class="sr-card">
             <h3>
-              <a href="{{document.fields['0'].values['0']}}">
-                <span [innerHTML]="document.snippets['0'].values['0'] | textHighlight: searchQuery"></span>
+              <a href="{{document.fields['0'].values['0']}}"> <!-- get the link -->
+                <span [innerHTML]="document.snippets['0'].values['0']"></span> <!-- get the title -->
               </a>
             </h3>
             <p class="sr-loc">
-              <span [innerHTML]="document.fields['0'].values['0'] | textHighlight: searchQuery"></span>
+              <span [innerHTML]="document.fields['0'].values['0']"></span><!-- get the link -->
             </p>
-            <p *ngIf="document.snippets[1].values[0]" class="sr-desc">
-              <span [innerHTML]="document.snippets[1].values[0] | textHighlight: searchQuery"></span>
+            <p *ngIf="document.snippets[2].values[0]" class="sr-desc"><!-- get the description -->
+              <span [innerHTML]="document.snippets[2].values[0]"></span>
             </p>
-            <p *ngIf="!document.snippets[1].values[0]" class="sr-desc">No Description was found.</p>
+            <p *ngIf="!document.snippets[2].values[0]" class="sr-desc">No Description was found.</p><!-- if there is no description -->
           </div>
         </ng-container>
         <div id="no-results" *ngIf="documents.length == 0">
