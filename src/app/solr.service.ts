@@ -12,14 +12,14 @@ import { OssQuery, OssTemplateQuery } from './models/oss_query.model';
 export class SolrService {
 
   // OSS Variables
-  private oss_ip = '52.90.135.249';
+  private oss_ip = '34.204.52.99';
   private queryOptions = new OssQuery();
   private templateQueryOptions = new OssTemplateQuery();
 
-  private index = 'query-OandO-1';
-  private template = 'search';
-  private lg= 'b1DVMLMAII8ihBVhsllf';
-  private tk= "8c2f587fcad8569e962e4fca50624dd6";
+  private index = 'discover-luxury-S1CM1';
+  private template = 'textSearch';
+  private lg= ']9-pp9.e[v5HF5Z2;W:"';
+  private tk= "617ed356967a0ae72ebef2a5d0b2b8a4";
 
   constructor( private _http : Http) {
       console.log('OSS Services Are Ready');
