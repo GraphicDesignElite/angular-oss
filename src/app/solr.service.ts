@@ -12,14 +12,15 @@ import { OssQuery, OssTemplateQuery } from './models/oss_query.model';
 export class SolrService {
 
   // OSS Variables
-  private oss_ip = '34.204.52.99';
+  private oss_ip = '';
+  private oss_url = 'dlns-pep-m3d2s9nc4y52ws55.search.luxury';
   private queryOptions = new OssQuery();
   private templateQueryOptions = new OssTemplateQuery();
 
-  private index = 'discover-luxury-S1CM1';
+  private index = 'luxury-search-master-1-v2';
   private template = 'textSearch';
-  private lg= ']9-pp9.e[v5HF5Z2;W:"';
-  private tk= "617ed356967a0ae72ebef2a5d0b2b8a4";
+  private lg = 'Lrben2WAAFZML4ak';
+  private tk = 'e960453669c7e2f96167ca058da13857';
 
   constructor( private _http : Http) {
       console.log('OSS Services Are Ready');
@@ -37,12 +38,12 @@ export class SolrService {
         this.queryOptions.rows = rows;
 
 
-        console.log(JSON.stringify(this.queryOptions));// get rid of this !!!!!!!!
+        //console.log(JSON.stringify(this.queryOptions));// get rid of this !!!!!!!!
         return this._http.post(oss_URL, JSON.stringify(this.queryOptions), options)
         .map(res => res.json());    
   }
   searchOSSTemplate(query:string, rows:number, offset:number){
-        let oss_URL: string = 'http://' + this.oss_ip + ':9090/services/rest/index/' + this.index + '/search/field/'+ this.template +'?login='+ this.lg +'&key='+ this.tk;
+        let oss_URL: string = 'http://' + this.oss_url + ':9090/services/rest/index/' + this.index + '/search/field/'+ this.template +'?login='+ this.lg +'&key='+ this.tk;
         let headers: Headers = new Headers();
         headers.append("Content-Type", "application/json");
         let options = new RequestOptions({headers: headers});
@@ -52,7 +53,7 @@ export class SolrService {
         this.templateQueryOptions.start = offset;
         this.templateQueryOptions.rows = rows;
 
-        console.log('template search');
+        //console.log('template search');
         console.log(JSON.stringify(this.templateQueryOptions));// get rid of this !!!!!!!!
 
         return this._http.post(oss_URL, JSON.stringify(this.templateQueryOptions), options)

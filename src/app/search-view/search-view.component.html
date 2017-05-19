@@ -4,8 +4,9 @@
     <!--start form -->
     <div id="search-form-wrapper">
       <img src="../../assets/img/ln_logo.svg" id="logo-large" />
+      <h1 id="home-title">Web Search for People With A Passion For Luxury.</h1>
       <form id="search-form" name="search-form" (submit)="searchApi()">
-        <input id="search-query" name="search-query" placeholder="Search the .luxury Network" [(ngModel)]="searchQuery" #searchinput />
+        <input id="search-query" name="search-query" placeholder="Search the dotLuxury Network" [(ngModel)]="searchQuery" #searchinput />
         <input type="submit" id="search-button" (click)="searchApi()" value="Search"/>
       </form>
     </div>
@@ -14,7 +15,7 @@
     
     <!--start results -->
     <div id="results" class="clearfix" *ngIf="results">
-      <p class="sr-result">{{numFound}} Results ( {{responseTime}} ms )</p>
+      <p class="sr-result">{{numFound}} Luxury Network Results Found <span class="response-time">( {{responseTime}} ms )</span></p>
       <div id="results-wrapper">
         <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
           <div class="sr-card">

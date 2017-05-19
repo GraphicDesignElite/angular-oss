@@ -37,7 +37,7 @@ export class SearchViewComponent implements OnInit {
   ngOnInit() {
     this._route.queryParams.subscribe(params => {
       if (params['q']) {
-
+          
           this.searchQuery = params['q'];
           if (params['page']) { // pagination
             this.page = parseInt(params['page']);
@@ -55,8 +55,6 @@ export class SearchViewComponent implements OnInit {
             //console.log(results);
             console.log(this.documents);
           });
-
-      
     }
     });
   }

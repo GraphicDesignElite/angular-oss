@@ -29,6 +29,7 @@ strong, b{
 .wrapper {
   min-height: 100%;
   margin-bottom: -80px;
+  background:#FBFAFA; 
 }
 .footer,
 .push {
@@ -51,35 +52,41 @@ strong, b{
 #header-links>ul>li>a:hover{ color:#333; text-decoration:underline;}
 
 /* Search Form */
-#search-page{background:#FBFAFA;}
-#logo-large{margin:auto; max-width:300px; margin-bottom:30px;}
+#search-page{height: 100%;}
+#logo-large{margin:auto; max-width:350px; margin-bottom:30px;}
+#home-title{ font-size:13px; margin-bottom:15px; text-transform: uppercase;}
 
-#search-query{ width:100%; height:55px; border:1px solid #efefef;box-sizing:border-box; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; padding-left:20px; padding-right: 0px; transition: all .3s ease-in-out;}
+#search-query{text-align: center; width:100%; height:55px; border:1px solid #efefef;box-sizing:border-box; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; padding-left:20px; padding-right: 0px; transition: all .3s ease-in-out;}
 #search-query:hover, #search-query:focus, #search-query:active{border-color: #ccc; -webkit-box-shadow: 1px 1px 3px 0px rgba(219,219,219,0.29); -moz-box-shadow: 1px 1px 3px 0px rgba(219,219,219,0.29); box-shadow: 1px 1px 3px 0px rgba(219,219,219,0.29);}
-.searching #search-query{height:40px;}
-#search-button, .btn{ margin-top:20px; padding: 10px 20px; border:0px; background:#333; text-decoration: none; color:#fff; display: inline-block;}
-#search-button:hover{background:#000;}
+#search-button, .btn{ cursor: pointer; margin-top:20px; padding: 15px 40px; border-radius:40px; border:2px solid #ddd; background:none; text-decoration: none; color:#000; display: inline-block;}
+#search-button:hover{background:#fff;}
 
-.searching #logo-large{display:none;}
-.searching #search-button{visibility:hidden; position:absolute; }
 
 #search-form-wrapper{ width:100%; margin:60px 0px 0px 0px; text-align: center; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; box-sizing: border-box; padding-bottom:30px;}
+
 .searching #search-form-wrapper{width:auto; margin:0px; text-align: left; padding:0px; border:0px; position:absolute; z-index:300; top:56px; left:15px; right:15px;  }
 .searching #search-form-wrapper:hover:after{content:'Press Enter To Search'; font-size: .8em; color:#777; position: relative; top:10px;}
-.searching #search-query{max-width:500px;}
+.searching #search-query{max-width:500px; text-align: left; height:40px;}
+.searching #logo-large, .searching #home-title{display:none;}
+.searching #search-button{visibility:hidden; position:absolute; }
 
 #results{padding: 30px 0px;}
 #no-results{padding:10px 15px; margin-top:20px; border:1px solid #efefef; background:#fff;}
+.response-time{ font-size:.8em; color:#aaa;}
 #results-wrapper{ padding:0px 0px 30px 0px; box-sizing: border-box; }
 #sidebar{ float:right; padding:0px 0px 30px 15px; width:40%; box-sizing: border-box; display:none;}
 
 .sr-result{ color:#888; font-size: .85em; padding-bottom:30px; border-bottom:1px solid #efefef; margin-bottom:20px;}
-.sr-card{ border:1px solid #efefef; padding:20px 20px; margin-bottom:8px; background:#fff; }
-.sr-card h3{ margin-bottom:5px; text-transform: capitalize; }
+.sr-card{ border:1px solid #efefef; padding:25px 25px; margin-bottom:8px; background:#fff; transition: .3s all;}
+.sr-card:hover{border:1px solid #eee; box-shadow: 0 1px 3px rgba(0,0,0,0.05); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.05); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
+
+.sr-card h3{ margin-bottom:5px; text-transform: capitalize;     border-bottom: 1px solid #f1efef;
+    padding-bottom: 5px;
+    margin-bottom: 10px;}
 .sr-card h3 a{ font-size:1.3em; line-height: 1.3em; color:#000; text-decoration: none;}
 .sr-card h3 a:hover{ text-decoration: underline; }
 .sr-loc{ color:#a29951; margin-bottom:8px; line-height: 1.3em; }
-.sr-desc{line-height:1.3em; color:#555; text-transform: capitalize; }
+.sr-desc{line-height:1.3em; color:#555;  }
 
 
 /* Pagination */
@@ -108,7 +115,7 @@ strong, b{
     @media only screen and (min-width : 768px) {
         #search-form-wrapper{ width:50%; border:1px solid #fbfafa; margin:100px auto; padding:50px;}
         
-        #results-wrapper{float:left; padding:0px 15px 30px 0px; width:60%;}
+        #results-wrapper{padding:0px 15px 30px 15px; width:70%; margin:auto;}
         #sidebar{display: block;}
     }
 
