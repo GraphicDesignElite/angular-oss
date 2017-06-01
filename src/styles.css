@@ -63,7 +63,6 @@ strong, b{
 
 
 #search-form-wrapper{ width:100%; margin:60px 0px 0px 0px; text-align: center; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; box-sizing: border-box; padding-bottom:30px;}
-
 .searching #search-form-wrapper{width:auto; margin:0px; text-align: left; padding:0px; border:0px; position:absolute; z-index:300; top:56px; left:15px; right:15px;  }
 .searching #search-form-wrapper:hover:after{content:'Press Enter To Search'; font-size: .8em; color:#777; position: relative; top:10px;}
 .searching #search-query{max-width:500px; text-align: left; height:40px;}
@@ -80,15 +79,15 @@ strong, b{
 .sr-card{ border:1px solid #efefef; padding:25px 25px; margin-bottom:8px; background:#fff; transition: .3s all;}
 .sr-card:hover{border:1px solid #eee; box-shadow: 0 1px 3px rgba(0,0,0,0.05); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.05); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
 
-.sr-card h3{ margin-bottom:5px; text-transform: capitalize;     border-bottom: 1px solid #f1efef;
-    padding-bottom: 5px;
-    margin-bottom: 10px;}
+.sr-card h3{ margin-bottom:5px; text-transform: capitalize; border-bottom: 1px solid #f1efef; padding-bottom: 5px; margin-bottom: 10px;}
 .sr-card h3 a{ font-size:1.3em; line-height: 1.3em; color:#000; text-decoration: none;}
 .sr-card h3 a:hover{ text-decoration: underline; }
 .sr-loc{ color:#a29951; margin-bottom:8px; line-height: 1.3em; }
 .sr-desc{line-height:1.3em; color:#555;  }
 
-
+.facet-dropdown{float:right;}
+.facet-dropdown li a{ display:block; background: #fff; padding:15px 35px; border-bottom:1px solid #f3f3f3; cursor:pointer; }
+.facet-dropdown li a:hover{ background:#FBFAFA; }
 /* Pagination */
 .pagination-wrapper{ text-align: center; padding:15px 15px; }
 .pagination-buttons .ng2-pagination li{transition:all .3;}

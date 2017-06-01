@@ -1,0 +1,7 @@
+<div class="facet-results">
+  <ul class="facet-dropdown">
+    <li class="facet-link" *ngFor="let filter of filterlist">
+      <a (click)="toggleFilter(filter.term)">{{filter.term}} ({{filter.count}})</a>
+    </li>
+  </ul>
+</div>

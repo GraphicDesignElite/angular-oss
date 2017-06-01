@@ -17,6 +17,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
 import { FooterComponent } from './footer/footer.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { TextHighlightPipe } from './text-highlight.pipe';
+import { FilterListComponent } from './filter-list/filter-list.component';
 
 
 
@@ -28,7 +29,8 @@ import { TextHighlightPipe } from './text-highlight.pipe';
     PaginationButtonsComponent,
     FooterComponent,
     PageHeaderComponent,
-    TextHighlightPipe
+    TextHighlightPipe,
+    FilterListComponent
  
   ],
   imports: [
