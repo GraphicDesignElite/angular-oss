@@ -11,6 +11,7 @@ import { QueryFilter } from '../models/oss_query.model'; // Import Query Model
   styleUrls: ['./search-view.component.css']
 })
 export class SearchViewComponent implements OnInit {
+
   @ViewChild('searchinput') searchinput; // Model Our Input
   private subscription; // Clean Our Service 
   searching:boolean = false; // Modifies Visual Output Only After Typing
@@ -22,6 +23,7 @@ export class SearchViewComponent implements OnInit {
   results :any; 
   documents:any[];
   searchFacets:any[];
+
   // Sensible Defaults
   page:number = 1;
   rowsToDisplay:number = 10;
@@ -33,7 +35,7 @@ export class SearchViewComponent implements OnInit {
   
 
   constructor(private _solrService: SolrService, public _route: ActivatedRoute, private _router: Router){
-        _router.events.subscribe((val) => { // scroll to top after each search
+        _router.events.subscribe((val) => { // scroll to top 
             if (val instanceof NavigationEnd){
                 window.scrollTo(0,0);
             }
@@ -62,8 +64,6 @@ export class SearchViewComponent implements OnInit {
           }
 
 
-          
-
           // Call our service
           this.subscription = this._solrService.searchOSSTemplate(this.searchQuery, this.rowsToDisplay, this.offset, this.queryFilters).subscribe(results =>{
             this.results = results;
@@ -85,38 +85,28 @@ export class SearchViewComponent implements OnInit {
       
   }
   toggleFilter(filter:string){
-
-      if(this.filterString == ''){ // add first filter
-        this.filterString = filter; 
-      }
-      else if(this.filterString.includes(filter.toString())){ // remove filters
-          this.filterString = this.filterString.replace('-' + filter, '');
-          this.filterString = this.filterString.replace(filter + '-', '');
-          this.filterString = this.filterString.replace(filter, '');
-      }else{
-         this.filterString += '-' + filter // add aditional filters
-      }
-      this.searchApi(); // call search
+      this.filterString = filter;
+      this.searchApi();
   }
   generateParameters(){
     var params = {};
-    if(this.searchQuery != ''){
-      params["q"] = this.searchQuery; 
-    }
-    if(this.page){
-      params["page"] = 1;   
-    } 
-    if(this.filterString != ''){
+    if(this.searchQuery != ''){// Check only If Query
+      params["q"] = this.searchQuery;
+      if(this.page){
+        params["page"] = 1;   
+      } 
+      if(this.filterString != ''){
         params["filter"] = this.filterString;   
+      }
     }
     return params; 
   }
   isSearching(){
     if(this.searchQuery != ''){
-        this.searching = true;
+        return this.searching = true;
     }
     return this.searching;
-  }
+    }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

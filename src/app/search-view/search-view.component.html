@@ -14,19 +14,12 @@
 
     <!--start results -->
     <div id="results" class="clearfix" *ngIf="results">
-      <p class="sr-result">{{numFound}} Luxury Network Results Found <span class="response-time">( {{responseTime}} ms )</span></p>    
-      
-      <app-filter-list [filterlist]="searchFacets"></app-filter-list>
-      <div class="facet-results">
-        <ul class="facet-dropdown">
-          <li class="facet-link" *ngFor="let facet of searchFacets">
-              <a (click)="toggleFilter(facet.term)">{{facet.term}} ({{facet.count}})</a>
-          </li>
-        </ul>
+      <div class="sr-result-container">
+        <p class="sr-result">{{numFound}} Luxury Network Results Found <span class="response-time">( {{responseTime}} ms )</span></p>    
+        <app-filter-list [filterlist]="searchFacets" [activeFilters]="filterString" (toggle)="toggleFilter($event)"></app-filter-list>
       </div>
 
       <div id="results-wrapper">
-
         <!-- start result -->
         <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
           <div class="sr-card">
