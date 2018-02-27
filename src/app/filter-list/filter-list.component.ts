@@ -30,12 +30,14 @@ export class FilterListComponent implements OnInit {
       }
       this.toggle.emit(this.activeFilters);  
   }
+
   activeFilter(filter:string){
     if(this.activeFilters.includes(filter)){
       return true;
     }
     return false;
   }
+  
   showFilterlist(shown){
     this.listShown = !this.listShown;
   }

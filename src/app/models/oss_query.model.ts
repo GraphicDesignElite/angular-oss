@@ -63,12 +63,14 @@ export class OssTemplateQuery {
   start:number;
   rows:number;
   lang: string;
+  filterOperator: string;
   filters: QueryFilter[];
-  constructor(query:string = '', start:number = 0, rows:number = 10, filters:QueryFilter[] = [new QueryFilter()]) { 
+  constructor(query:string = '', start:number = 0, rows:number = 10, filters:QueryFilter[] = [new QueryFilter()], filterOperator:string = 'AND') { 
         this.query = query;
         this.start = start;
         this.rows = rows;
         this.lang = 'ENGLISH';
         this.filters = filters;
+        this.filterOperator = filterOperator;
     }
 }

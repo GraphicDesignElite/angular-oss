@@ -1,8 +1,8 @@
-<div class="facet-results">
+<div class="facet-results" *ngIf="filterlist.length">
   <a class="filter-button" (click)="showFilterlist(listShown)" [ngClass]="{'expanded': listShown}"><span class="caret">Show Filters</span></a>
   <ul class="facet-dropdown" [ngClass]="{'expanded': listShown}">
     <li class="facet-link" *ngFor="let filter of filterlist">
-      <a (click)="createFilter(filter.term)" [ngClass]="{'active': activeFilter(filter.term)}">{{filter.term}}&nbsp;<span class="filter-count">({{filter.count}})</span></a>
+      <a (click)="createFilter(filter.term)" [ngClass]="{'active': activeFilter(filter.term)}">{{filter.term}}<!--<span class="filter-count">({{filter.count}})</span>--></a>
     </li>
   </ul>
 </div>

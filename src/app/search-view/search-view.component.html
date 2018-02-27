@@ -22,7 +22,7 @@
       <div id="results-wrapper">
         <!-- start result -->
         <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
-          <div class="sr-card">
+          <div class="sr-card clearfix">
             <h3>
                 <a href="{{document.fields[2].values[0]}}" target="_blank"> <!-- get the link -->
                   <ng-container *ngIf="document.fields[0].values[0]">
@@ -39,6 +39,7 @@
             <p *ngIf="document.snippets[0].values[0]" class="sr-desc"><!-- get the description -->
               <span [innerHTML]="document.snippets[0].values[0] | textHighlight: searchedLast"></span>
             </p>
+            
             <p *ngIf="!document.snippets[0].values[0]" class="sr-desc">No Description was found.</p><!-- if there is no description -->
           </div>
         </ng-container>
@@ -52,5 +53,5 @@
   </div>
 </div>
 <div class="pagination-wrapper">
-    <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound"></pagination-buttons>
+    <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound" [activeFilters]="filterString"></pagination-buttons>
 </div>

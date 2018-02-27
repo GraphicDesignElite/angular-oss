@@ -13,7 +13,7 @@ export class SolrService {
 
   // OSS Variables
 
-  private oss_url = 'dlns-pep-m3d2s9nc4y52ws55.search.luxury';
+  private oss_url = 'dlns-pep2-m3d2s9nc4y52ws55.search.luxury';
   private templateQueryOptions = new OssTemplateQuery();
 
   private index = 'luxury-search-master-1-v2';
@@ -27,7 +27,7 @@ export class SolrService {
  
 
   searchOSSTemplate(query:string, rows:number, offset:number, filters:QueryFilter[]){
-        let oss_URL: string = 'http://' + this.oss_url + ':9090/services/rest/index/' + this.index + '/search/field/'+ this.template +'?login='+ this.lg +'&key='+ this.tk;
+        let oss_URL: string = 'https://' + this.oss_url + ':443/services/rest/index/' + this.index + '/search/field/'+ this.template +'?login='+ this.lg +'&key='+ this.tk;
         let headers: Headers = new Headers();
         headers.append("Content-Type", "application/json");
         let options = new RequestOptions({headers: headers});
@@ -38,6 +38,7 @@ export class SolrService {
         this.templateQueryOptions.rows = rows;
         this.templateQueryOptions.filters = filters;
 
+        console.log("The Query To Be Sent To OSS: ");
         console.log(JSON.stringify(this.templateQueryOptions));// get rid of this !!!!!!!!
 
         return this._http.post(oss_URL, JSON.stringify(this.templateQueryOptions), options)

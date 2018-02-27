@@ -11,7 +11,9 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
   @Input() page: number;
   @Input() searchQuery: string;
   @Input() numFound: number;
-  adjacent: number = 6;
+  @Input() activeFilters: string;
+  
+  urlParams: Object = {};
 
   repeat = Array;
   currentPage: number;
@@ -20,22 +22,42 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
   }
   ngOnInit() {
     this.currentPage = this.page;
+    
   }
   ngOnChanges(changes:any):void {
     this.currentPage = this.page;
   }
+
+  
+
   paginateToPage(page:number){
-    this._router.navigate(['/search'], { queryParams: {q:this.searchQuery, page:page} })
+    if(this.activeFilters !=''){
+      this._router.navigate(['/search'], { queryParams:  {q:this.searchQuery, page:page, filter:this.activeFilters}} )
+    }
+    else{
+      this._router.navigate(['/search'], { queryParams:  {q:this.searchQuery, page:page}} )
+    }
   }
+
   paginateNext(){
-     // check this against total 
     let nextPage:number = this.page + 1;
-    this._router.navigate(['/search'], { queryParams: {q:this.searchQuery, page:nextPage} })
+    if(this.activeFilters !=''){
+      this._router.navigate(['/search'], { queryParams:  {q:this.searchQuery, page:nextPage, filter:this.activeFilters}} )
+    }
+    else{
+      this._router.navigate(['/search'], { queryParams:  {q:this.searchQuery, page:nextPage}} )
+    }
     
   }
+
   paginatePrev(){
     if(this.page > 0){
-      this._router.navigate(['/search'], { queryParams: {q:this.searchQuery, page:this.page - 1} })
+      if(this.activeFilters !=''){
+        this._router.navigate(['/search'], { queryParams: {q:this.searchQuery, page:this.page - 1, filter:this.activeFilters} })
+      }
+      else{
+        this._router.navigate(['/search'], { queryParams: {q:this.searchQuery, page:this.page - 1} })
+      }
     }
   }
   

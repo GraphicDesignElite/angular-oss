@@ -30,7 +30,7 @@ export class SearchViewComponent implements OnInit {
   offset:number = 0;
 
   queryFilters:QueryFilter[] = []; // Query Filter
-  filterString:string = ''; // Serialize Query - URL
+  filterString:string = ''; // Serialize Query URL
   responseTime:any;
   
 
@@ -43,12 +43,13 @@ export class SearchViewComponent implements OnInit {
   }
   ngOnInit() {
     this._route.queryParams.subscribe(params => {
-      if (params['q']) { // If Query
+      if (params['q']) { // If Searching
           
           this.searchQuery = params['q'];
           this.searchedLast = this.searchQuery;
 
-          if (params['page']) { // Pagination only if page is set
+
+          if (params['page']) { // Paginate Based On Page Parameter
             this.page = parseInt(params['page']);
             this.offset = (this.page - 1) * this.rowsToDisplay -1; // Page 1 based
             if(this.offset!=0){this.offset++;}
@@ -56,32 +57,43 @@ export class SearchViewComponent implements OnInit {
 
           if (params['filter']) { // Retain Filters and Set QueryFilter
             this.filterString = params['filter'];
-            var query = 'searchLuxuryHost:' + this.filterString.replace(/\-/g,' searchLuxuryHost:');
-            this.queryFilters[0] = new QueryFilter(query, "QueryFilter", false);
-            console.log(this.queryFilters[0]);
+            var query = 'searchLuxuryHost:' + this.filterString.replace(/\-/g,' OR searchLuxuryHost:'); // replace - url symbol with additional query setup
+            this.queryFilters[0] = new QueryFilter(query, "QueryFilter", false); // add processed url filters into query object
           }else{
             this.queryFilters[0] = new QueryFilter('', "QueryFilter", false);
+            this.filterString = '';
           }
 
 
           // Call our service
           this.subscription = this._solrService.searchOSSTemplate(this.searchQuery, this.rowsToDisplay, this.offset, this.queryFilters).subscribe(results =>{
             this.results = results;
-            this.numFound = this.results.numFound;
+            this.numFound = this.results.numFound - this.results.collapsedDocCount;
             this.responseTime = this.results.time;
             this.documents = this.results.documents;
-            this.searchFacets = this.results.facets[0].terms; // get search facets
+            
+            // set up local storage for current search term only
+            if(sessionStorage.getItem('query') != this.searchQuery || this.filterString == ""){
+              sessionStorage.setItem('query', this.searchQuery);
+              this.searchFacets = this.results.facets[0].terms; // get search facets
+              sessionStorage.setItem('facets', JSON.stringify(this.searchFacets)); // store search facets
+            }
+            else{
+              // recall available site filters for current search term
+              this.searchFacets = JSON.parse(sessionStorage.getItem('facets'));
+            }
+
+            console.log("The Results Returned From OSS: ");
             console.log(results);
             
           });
-    }
+        }
     });
   }
   searchApi(){
       this.searchinput.nativeElement.blur();
-      var params = this.generateParameters();
-      
-      this._router.navigate(['/search'], { queryParams: params })
+      var searchParams = this.generateParameters();
+      this._router.navigate(['/search'], { queryParams: searchParams })
       
   }
   toggleFilter(filter:string){
