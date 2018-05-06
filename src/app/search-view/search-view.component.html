@@ -1,13 +1,14 @@
-<div id="search-page" [class.searching]="isSearching()">
+<div id="search-page">
   <app-page-header></app-page-header>
   <div id="content">
     <!--start form -->
     <div id="search-form-wrapper">
-      <img src="../../assets/img/ln_logo.svg" id="logo-large" />
+      <img src="../../assets/img/luxurynetwork_logo_white.png" id="logo-large" />
       <h1 id="home-title">Web Search for People With A Passion For Luxury.</h1>
       <form id="search-form" name="search-form" (submit)="searchApi()">
-        <input id="search-query" name="search-query" placeholder="Search the dotLuxury Network" [(ngModel)]="searchQuery" #searchinput />
-        <input type="submit" id="search-button" (click)="searchApi()" value="Search"/>
+        <input id="search-query" name="search-query" placeholder="Search the dotLuxury Network" [(ngModel)]="searchQuery" #searchinput
+        />
+        <input type="submit" id="search-button" (click)="searchApi()" value="Search" />
       </form>
     </div>
     <!--end form -->
@@ -15,7 +16,9 @@
     <!--start results -->
     <div id="results" class="clearfix" *ngIf="results">
       <div class="sr-result-container">
-        <p class="sr-result">{{numFound}} Luxury Network Results Found <span class="response-time">( {{responseTime}} ms )</span></p>    
+        <p class="sr-result">{{numFound}} Luxury Network Results Found
+          <span class="response-time">( {{responseTime}} ms )</span>
+        </p>
         <app-filter-list [filterlist]="searchFacets" [activeFilters]="filterString" (toggle)="toggleFilter($event)"></app-filter-list>
       </div>
 
@@ -24,34 +27,41 @@
         <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
           <div class="sr-card clearfix">
             <h3>
-                <a href="{{document.fields[2].values[0]}}" target="_blank"> <!-- get the link -->
-                  <ng-container *ngIf="document.fields[0].values[0]">
-                    <span [innerHTML]="document.fields[0].values[0] | textHighlight: searchedLast"></span> <!-- get the title -->
-                  </ng-container>
-                  <ng-container *ngIf="!document.fields[0].values[0]">
-                    <span>No Title</span>
-                  </ng-container>
-                </a>
+              <a href="{{document.fields[2].values[0]}}" target="_blank">
+                <!-- get the link -->
+                <ng-container *ngIf="document.fields[0].values[0]">
+                  <span [innerHTML]="document.fields[0].values[0] | textHighlight: searchedLast"></span>
+                  <!-- get the title -->
+                </ng-container>
+                <ng-container *ngIf="!document.fields[0].values[0]">
+                  <span>No Title</span>
+                </ng-container>
+              </a>
             </h3>
             <p class="sr-loc" *ngIf="document.fields[2].values[0]">
-              <span [innerHTML]="document.fields[2].values[0] | textHighlight: searchedLast"></span><!-- get the link -->
+              <span [innerHTML]="document.fields[2].values[0] | textHighlight: searchedLast"></span>
+              <!-- get the link -->
             </p>
-            <p *ngIf="document.snippets[0].values[0]" class="sr-desc"><!-- get the description -->
+            <p *ngIf="document.snippets[0].values[0]" class="sr-desc">
+              <!-- get the description -->
               <span [innerHTML]="document.snippets[0].values[0] | textHighlight: searchedLast"></span>
             </p>
-            
-            <p *ngIf="!document.snippets[0].values[0]" class="sr-desc">No Description was found.</p><!-- if there is no description -->
+
+            <p *ngIf="!document.snippets[0].values[0]" class="sr-desc">No Description was found.</p>
+            <!-- if there is no description -->
           </div>
         </ng-container>
         <!-- end result -->
 
         <div id="no-results" *ngIf="documents.length == 0">
-          <p>No Results Were Found for: <strong>{{searchedLast}}</strong></p>
+          <p>No Results Were Found for:
+            <strong>{{searchedLast}}</strong>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="pagination-wrapper">
-    <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound" [activeFilters]="filterString"></pagination-buttons>
+  <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound" [activeFilters]="filterString"></pagination-buttons>
 </div>

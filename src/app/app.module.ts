@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 
 import { SolrService } from './solr.service';
+import { DisplayService } from './display.service';
 
 import { AppRouting } from './app.routing';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -31,7 +32,7 @@ import { FilterListComponent } from './filter-list/filter-list.component';
     PageHeaderComponent,
     TextHighlightPipe,
     FilterListComponent
- 
+
   ],
   imports: [
     BrowserModule,
@@ -39,10 +40,10 @@ import { FilterListComponent } from './filter-list/filter-list.component';
     HttpModule,
     AppRouting,
     Ng2PaginationModule,
-    
-    
+
+
   ],
-  providers: [SolrService ],
+  providers: [SolrService, DisplayService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
